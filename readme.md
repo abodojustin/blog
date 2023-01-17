@@ -12,3 +12,6 @@
 - Ensuite on installe EasyAdmin via la commande: ````composer require admin````
 - ````symfony console make:admin:dashboard````: pour générer notre dashboard avec les valeurs par défaut
 - Puis on va générer le CRUD pour chaque entité avec la commande ````symfony console make:admin:crud````
+
+
+- ````symfony console make:user````
