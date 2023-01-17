@@ -15,3 +15,7 @@
 
 
 - ````symfony console make:user````
+
+- ````symfony console make:user Admin````
+- ````symfony console security:hash-password````: Pour générer un mote de passe Administrateur 
+- ````symfony console make:auth````: On va générer un template pour la connexion et créer une classe d'authentification, il peut aussi arriver qu'on mette à jour la configuration de sécurité
