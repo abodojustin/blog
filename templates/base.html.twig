@@ -1,3 +1,7 @@
+{% set menus = menu_service.findAll %}
+
+{% dump(menus) %}
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -18,16 +22,16 @@
         <nav class="py-2 bg-dark border-bottom">
             <div class="container d-flex flex-wrap">
                 <div class="dropdown">
-                    <a href="#" class="nav-link link-light px-2 text-white dropdown-toggle" role="button" id="dropdownAdminLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="nav-link link-light px-2 text-white dropdown-toggle" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Mon Blog
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownAdminLink">
-                        <li><a href="#" class="dropdown-item">Tableau de Bord</a></li>
+                        <li><a href="{{ path('admin') }}" class="dropdown-item">Tableau de Bord</a></li>
                         <li><a href="#" class="dropdown-item">Menus</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
-                    <a href="#" class="nav-link link-light px-2 text-white dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="nav-link link-light px-2 text-white dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Ajouter
                     </a>
                     <ul class="dropdown-menu">
@@ -44,7 +48,29 @@
                     <span class="fs-4">Mon Blog</span>
                 </a>
 
-                <ul class="nav nav-pills">
+                <ul class="nav nav-pills align-items-center">
+
+                    {% for menu in menus %}
+                        {% if menu.subMenus.count > 0 %}
+                            <div class="dropdown">
+                                <a class="nav-link link-light px-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="menu-label">{{ menu.name }}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% for subMenu in menu.subMenus %}
+                                        <li><a class="dropdown-item" href="{{ subMenu }}">{{ subMenu.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{{ menu }}" class="nav-link">
+                                    <span class="menu-label">{{ menu.name }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
                     <li class="nav-item">
                         <a href="#" class="nav-link text-dark">S'inscrire</a>
                     </li>
